@@ -31,6 +31,7 @@ class RealESRGANUpscaler:
         self.scale_factor = scale_factor
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = None
+        self.upsampler = None
         self.model_dir = Path("models")
         self.model_dir.mkdir(exist_ok=True)
 
@@ -143,6 +144,8 @@ class RealESRGANUpscaler:
                     half=False if self.device.type == "cpu" else True,
                     device=self.device,
                 )
+            else:
+                raise ValueError(f"Unknown model: {self.model_name}")
 
             self.upsampler = upsampler
             print(f"Model loaded successfully on {self.device}")
