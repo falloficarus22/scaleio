@@ -19,7 +19,7 @@ class SRDataset(Dataset):
         self.augment = augment
 
     def __len__(self):
-        return len(self.hr_images)
+        return len(self.hr_paths)
 
     def __getitem__(self, idx):
         hr_path = self.hr_paths[idx]
